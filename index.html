@@ -24,16 +24,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --abyss:#06090f; --panel:#0b111a; --panel-2:#0e151f;
-  --rule:rgba(139,118,86,.22); --rule-strong:rgba(139,118,86,.42);
-  --ink:#ece6da; --ink-2:#a79f8e; --ink-3:#6f6858;
-  --brass:#e3a340; --brass-hot:#ffca72; --brass-dim:#7d5c22;
-  --alarm:#e8503c; --warn:#d69a3c; --calm:#5f9f86; --sea-ink:#77b2d4;
-  --shadow:0 2px 18px rgba(0,0,0,.55);
-  color-scheme:dark;
+  --paper:#f6f1e4; --panel:#fbf7ec; --panel-2:#f2ebd9;
+  --rule:rgba(120,101,66,.26); --rule-strong:rgba(120,101,66,.46);
+  --ink:#2a2317; --ink-2:#6a6150; --ink-3:#9b9280;
+  --brass:#8a5a12; --brass-hot:#a3690f; --brass-dim:#c2a878;
+  --alarm:#b3261e; --warn:#96690f; --calm:#2f6b52; --sea-ink:#2d5c78;
+  --shadow:0 2px 14px rgba(60,48,25,.16);
+  color-scheme:light;
 }
 *{box-sizing:border-box}
-body{margin:0; background:var(--abyss); color:var(--ink);
+body{margin:0; background:var(--paper); color:var(--ink);
   font-family:"Spectral",Georgia,"Times New Roman",serif; -webkit-font-smoothing:antialiased}
 h1,h2{margin:0; font-weight:400; text-wrap:balance}
 button{font:inherit; color:inherit; background:none; border:none; cursor:pointer}
@@ -53,16 +53,16 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   letter-spacing:.13em; text-transform:uppercase; color:var(--ink-2);
   border:1px solid var(--rule-strong); padding:6px 11px; border-radius:2px;
   transition:color .15s,border-color .15s,background .15s; white-space:nowrap}
-.ghostbtn:hover{color:var(--brass-hot); border-color:var(--brass-dim);
-  background:rgba(227,163,64,.06)}
-.ghostbtn[aria-pressed="true"]{color:var(--brass-hot); border-color:var(--brass-dim);
-  background:rgba(227,163,64,.10)}
+.ghostbtn:hover{color:var(--brass-hot); border-color:var(--brass);
+  background:rgba(138,90,18,.08)}
+.ghostbtn[aria-pressed="true"]{color:var(--brass-hot); border-color:var(--brass);
+  background:rgba(138,90,18,.13)}
 
 .stage{flex:1 1 auto; min-height:0; display:grid;
   grid-template-columns:302px minmax(0,1fr)}
 .rail{display:flex; flex-direction:column; min-height:0; background:var(--panel);
   border-right:1px solid var(--rule); overflow-y:auto; scrollbar-width:thin}
-.mapwrap{position:relative; min-width:0; background:#0c1e33; overflow:hidden}
+.mapwrap{position:relative; min-width:0; background:#c6d6df; overflow:hidden}
 canvas{display:block; position:absolute; inset:0; width:100%; height:100%}
 
 .sect{padding:12px 14px 13px; border-bottom:1px solid var(--rule)}
@@ -90,7 +90,7 @@ canvas{display:block; position:absolute; inset:0; width:100%; height:100%}
 .tile.port .n{color:var(--sea-ink)}
 .tile.home .n{color:var(--calm)}
 .tile.lost .n{color:var(--alarm)}
-.sbar{display:flex; height:5px; margin-top:8px; background:rgba(255,255,255,.05)}
+.sbar{display:flex; height:5px; margin-top:8px; background:rgba(60,48,25,.09)}
 .sbar i{transition:width .25s}
 
 /* the fate board */
@@ -98,16 +98,16 @@ canvas{display:block; position:absolute; inset:0; width:100%; height:100%}
 .cell{display:flex; align-items:center; gap:5px; padding:1px 2px; border-radius:2px;
   font-family:"IBM Plex Mono",monospace; font-size:9.5px; color:var(--ink-3);
   cursor:default; line-height:1.5; overflow:hidden}
-.cell:hover{background:rgba(255,255,255,.06)}
+.cell:hover{background:rgba(60,48,25,.07)}
 .cell .dot{width:7px; height:7px; border-radius:50%; flex:none;
-  box-shadow:0 0 0 1px rgba(0,0,0,.5)}
+  box-shadow:0 0 0 1px rgba(255,255,255,.7)}
 .cell .nm{flex:1 1 auto; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .cell .gl{flex:none; width:9px; text-align:center; font-size:9px}
 .cell.sailed .nm{color:var(--ink)}
 .cell.unsailed{opacity:.38}
 .cell.unsailed .dot{background:transparent !important; box-shadow:0 0 0 1px var(--ink-3)}
 .cell.lost .nm{color:var(--alarm); text-decoration:line-through;
-  text-decoration-color:rgba(232,80,60,.6)}
+  text-decoration-color:rgba(179,38,30,.55)}
 .cell.lost .dot{background:var(--alarm) !important}
 .cell.home .nm{color:var(--calm)}
 
@@ -139,22 +139,22 @@ table.routes .home{color:var(--calm)}
   align-items:center; gap:14px; flex-wrap:wrap}
 .tl{position:relative; flex:1 1 340px; min-width:220px; height:58px}
 #tlc{position:absolute; inset:0; width:100%; height:100%; cursor:ew-resize}
-.playbtn{width:38px; height:38px; border:1px solid var(--brass-dim);
+.playbtn{width:38px; height:38px; border:1px solid var(--brass);
   border-radius:50%; display:grid; place-items:center; color:var(--brass-hot);
   flex:none; transition:background .15s}
-.playbtn:hover{background:rgba(227,163,64,.12)}
+.playbtn:hover{background:rgba(138,90,18,.12)}
 .seg{display:flex; border:1px solid var(--rule-strong); border-radius:2px;
   overflow:hidden}
 .seg button{font-family:"IBM Plex Mono",monospace; font-size:10px; padding:6px 9px;
   color:var(--ink-3); letter-spacing:.06em; border-right:1px solid var(--rule)}
 .seg button:last-child{border-right:none}
-.seg button[aria-pressed="true"]{background:rgba(227,163,64,.14); color:var(--brass-hot)}
+.seg button[aria-pressed="true"]{background:rgba(138,90,18,.15); color:var(--brass-hot)}
 .seglabel{font-family:"IBM Plex Mono",monospace; font-size:9px; letter-spacing:.14em;
   text-transform:uppercase; color:var(--ink-3); margin-right:-8px}
 
 /* map overlays */
 .legend{position:absolute; left:12px; bottom:12px; z-index:3; pointer-events:none;
-  background:rgba(6,9,15,.74); border:1px solid var(--rule); padding:9px 11px;
+  background:rgba(251,247,236,.90); border:1px solid var(--rule-strong); padding:9px 11px;
   font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.1em;
   color:var(--ink-2); line-height:1.85}
 .legend .row{display:flex; align-items:center; gap:7px}
@@ -167,7 +167,7 @@ table.routes .home{color:var(--calm)}
   font-family:"IBM Plex Mono",monospace; font-size:9px; letter-spacing:.12em;
   color:var(--ink-3); text-transform:uppercase}
 #tip{position:absolute; z-index:4; pointer-events:none; display:none;
-  background:rgba(6,9,15,.95); border:1px solid var(--rule-strong);
+  background:rgba(251,247,236,.97); border:1px solid var(--rule-strong);
   padding:8px 10px; max-width:270px; box-shadow:var(--shadow)}
 #tip .tn{font-family:"Marcellus",serif; font-size:14px; color:var(--brass-hot);
   letter-spacing:.03em}
@@ -179,7 +179,7 @@ table.routes .home{color:var(--calm)}
 dialog{border:1px solid var(--rule-strong); background:var(--panel-2);
   color:var(--ink); max-width:min(780px,94vw); width:100%; padding:0;
   box-shadow:var(--shadow)}
-dialog::backdrop{background:rgba(3,5,9,.82)}
+dialog::backdrop{background:rgba(40,32,16,.55)}
 .docbody{padding:24px 30px 30px; max-height:82vh; overflow-y:auto}
 .docbody h3{font-family:"IBM Plex Mono",monospace; font-size:10px;
   letter-spacing:.18em; text-transform:uppercase; color:var(--brass);
@@ -274,10 +274,10 @@ dialog::backdrop{background:rgba(3,5,9,.82)}
       <canvas id="windc"></canvas>
       <canvas id="shipc"></canvas>
       <div class="legend">
-        <div class="row"><span class="sw" style="background:hsl(43 70% 58%)"></span> Barbarikon &mdash; the Indus</div>
-        <div class="row"><span class="sw" style="background:hsl(168 70% 55%)"></span> Barygaza &mdash; Gujarat</div>
-        <div class="row"><span class="sw" style="background:hsl(294 66% 64%)"></span> Muziris &mdash; Malabar</div>
-        <div class="row"><span style="color:var(--alarm);font-size:13px;line-height:1">&times;</span> ship lost</div>
+        <div class="row"><span class="sw" style="background:hsl(43 78% 31%)"></span> Barbarikon &mdash; the Indus</div>
+        <div class="row"><span class="sw" style="background:hsl(168 72% 26%)"></span> Barygaza &mdash; Gujarat</div>
+        <div class="row"><span class="sw" style="background:hsl(294 62% 38%)"></span> Muziris &mdash; Malabar</div>
+        <div class="row"><span style="color:var(--alarm);font-size:14px;line-height:1;font-weight:700">&times;</span> ship lost</div>
         <div class="row" style="margin-top:5px">Wind speed, m/s</div>
         <div class="windscale" id="wscale"></div>
         <div class="scalenums"><span>0</span><span>10</span><span>20+</span></div>
@@ -339,9 +339,18 @@ const shLat = (k,i) => LAT[k*NT+i]/SC;
 const shSt  = (k,i) => ST[k*NT+i];
 const S_UNSAILED=0, S_SEA=1, S_PORT=2, S_MARKET=3, S_HOME=4, S_LOST=5;
 
+function shipColor(sh){
+  const j=(sh.i*37)%11;
+  return 'hsl('+sh.hue.toFixed(0)+' '+(60+(j%4)*8)+'% '+(26+(j%5)*2.6)+'%)';
+}
+for (const sh of SHIPS) sh.col = shipColor(sh);
+
 const MON=['January','February','March','April','May','June','July','August',
            'September','October','November','December'];
-function utcDate(y,m,d){ const x=new Date(Date.UTC(2000,m,d)); x.setUTCFullYear(y); return x; }
+function utcDate(y,m,d){
+  y += Math.floor(m/12); m = ((m%12)+12)%12;      // carry the year ourselves
+  const x=new Date(Date.UTC(2000,m,d)); x.setUTCFullYear(y); return x;
+}
 function dateAt(h){ return new Date(T0.getTime()+h*3600e3); }
 function fmtDate(d){ return d.getUTCDate()+' '+MON[d.getUTCMonth()]; }
 function monthF(d){
@@ -359,6 +368,22 @@ function computeFit(){
   const dx = VIEW.lon1-VIEW.lon0, dy = (mY(VIEW.lat1)-mY(VIEW.lat0))*180/Math.PI;
   fitK = Math.min(W/dx, H/dy);
   fitX = (W-dx*fitK)/2; fitY = (H-dy*fitK)/2;
+  clampView();
+}
+
+/* Never show anything outside the modelled basin: the map may be zoomed in as
+   far as 12x, but it can never be zoomed out past the domain or panned off it.
+   When an axis is letterboxed (the map is narrower than the pane) it is pinned
+   centred on that axis instead of being draggable into empty space. */
+function clampView(){
+  view.k = Math.max(1, Math.min(12, view.k));
+  const mapW = (VIEW.lon1-VIEW.lon0)*fitK*view.k;
+  const mapH = (mY(VIEW.lat1)-mY(VIEW.lat0))*180/Math.PI*fitK*view.k;
+  const ox = fitX*view.k, oy = fitY*view.k;
+  view.tx = mapW <= W ? (W-mapW)/2 - ox
+                      : Math.min(-ox, Math.max(W-mapW-ox, view.tx));
+  view.ty = mapH <= H ? (H-mapH)/2 - oy
+                      : Math.min(-oy, Math.max(H-mapH-oy, view.ty));
 }
 function px(lon,lat){
   const x = fitX + (lon-VIEW.lon0)*fitK;
@@ -420,11 +445,11 @@ const portPx = [];
 const keyLabels = [];
 function drawBase(){
   const g=ctxB.createLinearGradient(0,0,0,H);
-  g.addColorStop(0,'#0f2237'); g.addColorStop(.55,'#122a43'); g.addColorStop(1,'#0c1e33');
+  g.addColorStop(0,'#cfdde4'); g.addColorStop(.55,'#c3d5df'); g.addColorStop(1,'#b7cbd7');
   ctxB.fillStyle=g; ctxB.fillRect(0,0,W,H);
 
-  ctxB.strokeStyle='rgba(180,205,225,.09)'; ctxB.lineWidth=1;
-  ctxB.font='9px "IBM Plex Mono", monospace'; ctxB.fillStyle='rgba(150,175,195,.35)';
+  ctxB.strokeStyle='rgba(45,80,100,.16)'; ctxB.lineWidth=1;
+  ctxB.font='9px "IBM Plex Mono", monospace'; ctxB.fillStyle='rgba(45,80,100,.52)';
   ctxB.textBaseline='alphabetic'; ctxB.textAlign='left';
   for (let lon=35;lon<=75;lon+=5){
     const a=px(lon,VIEW.lat0), b=px(lon,VIEW.lat1);
@@ -447,9 +472,9 @@ function drawBase(){
     ctxB.closePath();
   });
   const lg=ctxB.createLinearGradient(0,0,W*.6,H);
-  lg.addColorStop(0,'#15110b'); lg.addColorStop(1,'#0d0b07');
+  lg.addColorStop(0,'#f2ead5'); lg.addColorStop(1,'#e8ddc2');
   ctxB.fillStyle=lg; ctxB.fill('evenodd');
-  ctxB.strokeStyle='rgba(163,133,84,.70)';
+  ctxB.strokeStyle='rgba(122,96,52,.72)';
   ctxB.lineWidth=Math.min(1.5,.95*view.k); ctxB.stroke();
 
   drawPorts();
@@ -477,11 +502,11 @@ function drawPorts(){
     const landmark = p.role==='landmark';
     const key = KEY_PORTS.has(p.key);
     ctxB.beginPath(); ctxB.arc(q[0],q[1],landmark?2:3.2,0,6.2832);
-    ctxB.fillStyle = landmark?'rgba(180,172,155,.7)':'rgba(240,225,200,.95)';
+    ctxB.fillStyle = landmark?'rgba(110,98,76,.75)':'rgba(50,40,22,.95)';
     ctxB.fill();
     if (key){
       ctxB.beginPath(); ctxB.arc(q[0],q[1],7,0,6.2832);
-      ctxB.strokeStyle='rgba(240,225,200,.35)'; ctxB.lineWidth=1; ctxB.stroke();
+      ctxB.strokeStyle='rgba(50,40,22,.42)'; ctxB.lineWidth=1; ctxB.stroke();
     }
     if (!showNames) continue;
 
@@ -506,12 +531,12 @@ function drawPorts(){
     }
     if (!put) continue;
     if (anchor){
-      ctxB.strokeStyle='rgba(240,225,200,.28)'; ctxB.lineWidth=1;
+      ctxB.strokeStyle='rgba(70,56,30,.36)'; ctxB.lineWidth=1;
       ctxB.beginPath(); ctxB.moveTo(q[0],q[1]);
       ctxB.lineTo(anchor[0]+(anchor[0]<q[0]?4:-4), anchor[1]); ctxB.stroke();
     }
-    ctxB.fillStyle = landmark?'rgba(180,172,155,.55)'
-      : key?'rgba(255,236,206,.98)':'rgba(236,230,218,.78)';
+    ctxB.fillStyle = landmark?'rgba(122,110,88,.85)'
+      : key?'#241d10':'rgba(58,48,30,.86)';
     ctxB.fillText(label, put[0], put[1]);
     if (key) keyLabels.push([label, put[0], put[1]]);
   }
@@ -537,8 +562,8 @@ function windAt(lon,lat,mf){
   }
   return [u/WG.scale, v/WG.scale];
 }
-const RAMP=[[0,[62,88,108]],[4,[78,120,142]],[8,[104,158,176]],
-            [12,[148,196,204]],[16,[205,226,226]],[22,[255,248,235]]];
+const RAMP=[[0,[150,168,178]],[4,[116,140,157]],[8,[82,108,131]],
+            [12,[52,80,105]],[16,[32,56,81]],[22,[14,30,52]]];
 function windColor(s){
   for (let i=1;i<RAMP.length;i++){
     if (s<=RAMP[i][0]||i===RAMP.length-1){
@@ -565,7 +590,7 @@ function seedParticles(){
 }
 function stepWind(mf){
   ctxW.globalCompositeOperation='destination-out';
-  ctxW.fillStyle='rgba(0,0,0,0.17)'; ctxW.fillRect(0,0,W,H);
+  ctxW.fillStyle='rgba(0,0,0,0.14)'; ctxW.fillRect(0,0,W,H);
   ctxW.globalCompositeOperation='source-over';
   ctxW.lineWidth=Math.min(1.2,.65+view.k*.12); ctxW.lineCap='round';
   const dt=0.030;
@@ -578,7 +603,7 @@ function stepWind(mf){
     const b=px(p.lon,p.lat);
     if (b[0]<-30||b[0]>W+30||b[1]<-30||b[1]>H+30) continue;
     const c=windColor(s);
-    ctxW.strokeStyle='rgba('+c[0]+','+c[1]+','+c[2]+','+(0.09+Math.min(0.34,s/44))+')';
+    ctxW.strokeStyle='rgba('+c[0]+','+c[1]+','+c[2]+','+(0.16+Math.min(0.46,s/32))+')';
     ctxW.beginPath(); ctxW.moveTo(a[0],a[1]); ctxW.lineTo(b[0],b[1]); ctxW.stroke();
   }
 }
@@ -599,7 +624,7 @@ function drawFleet(idx){
     if (last <= sh.i0) continue;
 
     if (trailMode==='full'){
-      ctxS.strokeStyle=sh.color; ctxS.globalAlpha=0.62; ctxS.lineWidth=1.25;
+      ctxS.strokeStyle=sh.col; ctxS.globalAlpha=0.55; ctxS.lineWidth=1.2;
       ctxS.beginPath();
       for (let j=sh.i0;j<=last;j++){
         const p=px(shLon(k,j),shLat(k,j));
@@ -608,7 +633,7 @@ function drawFleet(idx){
       ctxS.stroke();
     } else if (trailMode==='30'){
       const from=Math.max(sh.i0,last-WIN_30);
-      ctxS.strokeStyle=sh.color; ctxS.globalAlpha=0.85; ctxS.lineWidth=1.6;
+      ctxS.strokeStyle=sh.col; ctxS.globalAlpha=0.88; ctxS.lineWidth=1.7;
       ctxS.beginPath();
       for (let j=from;j<=last;j++){
         const p=px(shLon(k,j),shLat(k,j));
@@ -626,7 +651,7 @@ function drawFleet(idx){
         const f=(b+1)/BANDS;
         ctxS.globalAlpha=0.06+0.80*f*f;
         ctxS.lineWidth=0.9+1.1*f;
-        ctxS.strokeStyle=sh.color;
+        ctxS.strokeStyle=sh.col;
         ctxS.beginPath();
         for (let j=a0;j<=a1 && j<=last;j++){
           const p=px(shLon(k,j),shLat(k,j));
@@ -644,7 +669,7 @@ function drawFleet(idx){
     if (st===S_UNSAILED) continue;
     const p=px(shLon(k,i),shLat(k,i));
     if (st===S_LOST){
-      ctxS.strokeStyle='#e8503c'; ctxS.lineWidth=2.1; ctxS.lineCap='round';
+      ctxS.strokeStyle='#b3261e'; ctxS.lineWidth=2.3; ctxS.lineCap='round';
       const r=5.2;
       ctxS.beginPath();
       ctxS.moveTo(p[0]-r,p[1]-r); ctxS.lineTo(p[0]+r,p[1]+r);
@@ -654,17 +679,41 @@ function drawFleet(idx){
     }
     if (st===S_HOME) continue;
     if (st===S_SEA){
-      const g=ctxS.createRadialGradient(p[0],p[1],0,p[0],p[1],9);
-      g.addColorStop(0,'rgba(255,255,255,.20)'); g.addColorStop(1,'rgba(255,255,255,0)');
-      ctxS.fillStyle=g; ctxS.beginPath(); ctxS.arc(p[0],p[1],9,0,6.2832); ctxS.fill();
+      ctxS.beginPath(); ctxS.arc(p[0],p[1],6.4,0,6.2832);
+      ctxS.fillStyle='rgba(246,241,228,.82)'; ctxS.fill();
     }
     ctxS.beginPath(); ctxS.arc(p[0],p[1],st===S_SEA?3.4:2.6,0,6.2832);
-    ctxS.fillStyle=sh.color; ctxS.fill();
+    ctxS.fillStyle=sh.col; ctxS.fill();
     if (st!==S_SEA){
       ctxS.beginPath(); ctxS.arc(p[0],p[1],5.6,0,6.2832);
-      ctxS.strokeStyle=sh.color; ctxS.globalAlpha=.55; ctxS.lineWidth=1;
+      ctxS.strokeStyle=sh.col; ctxS.globalAlpha=.6; ctxS.lineWidth=1.2;
       ctxS.stroke(); ctxS.globalAlpha=1;
     }
+  }
+
+  // How many are lying at each Indian market right now. Without this a ship
+  // waiting out the monsoon is just a small dot among fading tracks, and the
+  // four-month wait -- the whole rhythm of the trade -- is invisible.
+  const lying={};
+  for (let k=0;k<NS;k++)
+    if (shSt(k,i)===S_MARKET) lying[SHIPS[k].dest]=(lying[SHIPS[k].dest]||0)+1;
+  const MKT_HUE={barbarikon:43,barygaza:168,muziris:294};
+  ctxS.font='10px "IBM Plex Mono", monospace';
+  ctxS.textBaseline='middle'; ctxS.textAlign='left';
+  for (const pt of PORTS){
+    const n=lying[pt.key]; if (!n) continue;
+    const q=px(pt.rlon!=null?pt.rlon:pt.lon, pt.rlat!=null?pt.rlat:pt.lat);
+    const txt=n+' lying';
+    const w=ctxS.measureText(txt).width;
+    const right = q[0] > W*0.72;
+    const bx = right ? q[0]-15-w : q[0]+11, by=q[1]+15;
+    ctxS.fillStyle='hsl('+MKT_HUE[pt.key]+' 62% 27%)';
+    ctxS.fillRect(bx-4, by-8, w+9, 16);
+    ctxS.fillStyle='#f6f1e4';
+    ctxS.fillText(txt, bx, by);
+    ctxS.strokeStyle='rgba(246,241,228,.65)'; ctxS.lineWidth=1;
+    ctxS.beginPath(); ctxS.moveTo(q[0],q[1]);
+    ctxS.lineTo(right ? bx+w+4 : bx-4, by-2); ctxS.stroke();
   }
 
   // the ports the fleet is actually sailing between, lifted clear of the tracks
@@ -673,9 +722,9 @@ function drawFleet(idx){
     ctxS.textBaseline='middle'; ctxS.textAlign='left';
     for (const [txt,x,y] of keyLabels){
       const w=ctxS.measureText(txt).width;
-      ctxS.fillStyle='rgba(6,9,15,.72)';
+      ctxS.fillStyle='rgba(246,241,228,.82)';
       ctxS.fillRect(x-3,y-7,w+6,14);
-      ctxS.fillStyle='rgba(255,236,206,.98)';
+      ctxS.fillStyle='#241d10';
       ctxS.fillText(txt,x,y);
     }
   }
@@ -694,7 +743,7 @@ const cells=SHIPS.map(sh=>{
   const el=document.createElement('div');
   el.className='cell';
   el.innerHTML='<span class="dot"></span><span class="nm"></span><span class="gl"></span>';
-  el.querySelector('.dot').style.background=sh.color;
+  el.querySelector('.dot').style.background=sh.col;
   el.querySelector('.nm').textContent=sh.name;
   el.addEventListener('mouseenter',e=>shipTip(sh,e));
   el.addEventListener('mouseleave',()=>{ $('tip').style.display='none'; });
@@ -847,9 +896,9 @@ function drawTL(idx){
   if (!band || band.length!==Math.max(60,Math.round(tW))) buildBand();
   tctx.clearRect(0,0,tW,tH);
   const top=4, hgt=tH-22, cols=band.length;
-  const order=[[S_LOST,'rgba(232,80,60,.85)'],[S_HOME,'rgba(95,159,134,.85)'],
-               [S_MARKET,'rgba(119,178,212,.55)'],[S_PORT,'rgba(119,178,212,.8)'],
-               [S_SEA,'rgba(255,202,114,.85)'],[S_UNSAILED,'rgba(255,255,255,.07)']];
+  const order=[[S_LOST,'rgba(179,38,30,.80)'],[S_HOME,'rgba(47,107,82,.68)'],
+               [S_MARKET,'rgba(45,92,120,.34)'],[S_PORT,'rgba(45,92,120,.62)'],
+               [S_SEA,'rgba(176,124,28,.72)'],[S_UNSAILED,'rgba(60,48,25,.07)']];
   let base=new Array(cols).fill(0);
   for (const [code,col] of order){
     tctx.fillStyle=col; tctx.beginPath();
@@ -866,24 +915,42 @@ function drawTL(idx){
   }
 
   tctx.font='9px "IBM Plex Mono", monospace'; tctx.textBaseline='top';
+  tctx.textAlign='left';
   let dd=utcDate(T0.getUTCFullYear(),T0.getUTCMonth()+1,1);
-  for (let guard=0; guard<40 && (dd-T0)/3600e3<T_END; guard++){
+  let lastLabel=-999;
+  for (let guard=0; guard<48 && (dd-T0)/3600e3<T_END; guard++){
     const x=((dd-T0)/3600e3)/T_END*tW;
-    tctx.strokeStyle='rgba(139,118,86,.32)';
-    tctx.beginPath(); tctx.moveTo(x,tH-18); tctx.lineTo(x,tH-13); tctx.stroke();
-    tctx.fillStyle='rgba(120,112,95,.95)';
-    tctx.fillText(MON[dd.getUTCMonth()].slice(0,3), Math.max(2,x+3), tH-12);
+    const jan = dd.getUTCMonth()===0;
+    tctx.strokeStyle = jan ? 'rgba(120,101,66,.65)' : 'rgba(120,101,66,.34)';
+    tctx.lineWidth = jan ? 1.4 : 1;
+    tctx.beginPath(); tctx.moveTo(x,tH-19); tctx.lineTo(x,tH-13); tctx.stroke();
+    const txt = jan ? 'Jan ' + dd.getUTCFullYear() : MON[dd.getUTCMonth()].slice(0,3);
+    const w = tctx.measureText(txt).width;
+    // only label where there is room, and never run off either end
+    if (x - lastLabel > w + 10 && x + w < tW - 2){
+      tctx.fillStyle = jan ? 'var(--ink-2)' : 'rgba(120,112,95,.95)';
+      tctx.fillStyle = jan ? '#6a6150' : '#9b9280';
+      tctx.fillText(txt, x+3, tH-11);
+      lastLabel = x;
+    }
     dd=utcDate(dd.getUTCFullYear(),dd.getUTCMonth()+1,1);
   }
+  // close the axis off at both ends so it reads as complete
+  tctx.strokeStyle='rgba(120,101,66,.45)'; tctx.lineWidth=1;
+  tctx.beginPath(); tctx.moveTo(0,tH-19); tctx.lineTo(0,tH-13);
+  tctx.moveTo(tW-0.5,tH-19); tctx.lineTo(tW-0.5,tH-13);
+  tctx.moveTo(0,tH-19); tctx.lineTo(tW,tH-19); tctx.stroke();
   for (const s of SHIPS){
     if (!s.lost) continue;
     const x=s.iend/(NT-1)*tW;
-    tctx.strokeStyle='rgba(232,80,60,.9)'; tctx.lineWidth=1.3;
+    tctx.strokeStyle='rgba(179,38,30,.95)'; tctx.lineWidth=1.3;
     tctx.beginPath(); tctx.moveTo(x,0); tctx.lineTo(x,5); tctx.stroke();
   }
   const px0=idx/(NT-1)*tW;
-  tctx.strokeStyle='#ffca72'; tctx.lineWidth=1.6;
-  tctx.beginPath(); tctx.moveTo(px0,0); tctx.lineTo(px0,tH-18); tctx.stroke();
+  tctx.strokeStyle='#8a5a12'; tctx.lineWidth=1.8;
+  tctx.beginPath(); tctx.moveTo(px0,0); tctx.lineTo(px0,tH-13); tctx.stroke();
+  tctx.beginPath(); tctx.arc(px0,3.5,3.2,0,6.2832);
+  tctx.fillStyle='#8a5a12'; tctx.fill();
 }
 
 /* ---------------- clock ---------------------------------------------- */
@@ -960,6 +1027,7 @@ wrap.addEventListener('pointermove',e=>{
   if (dragging){
     view.tx+=e.clientX-lastXY[0]; view.ty+=e.clientY-lastXY[1];
     lastXY=[e.clientX,e.clientY];
+    clampView();
     drawBase(); ctxW.clearRect(0,0,W,H); render(true);
   } else hoverMap(e.clientX-r.left, e.clientY-r.top);
 });
@@ -967,9 +1035,10 @@ wrap.addEventListener('wheel',e=>{
   e.preventDefault();
   const r=wrap.getBoundingClientRect();
   const mx=e.clientX-r.left,my=e.clientY-r.top;
-  const nk=Math.max(1,Math.min(9,view.k*Math.exp(-e.deltaY*0.0016)));
+  const nk=Math.max(1,Math.min(12,view.k*Math.exp(-e.deltaY*0.0016)));
   const a=nk/view.k;
   view.tx=mx-(mx-view.tx)*a; view.ty=my-(my-view.ty)*a; view.k=nk;
+  clampView();
   drawBase(); ctxW.clearRect(0,0,W,H); render(true);
 },{passive:false});
 
